@@ -1,0 +1,117 @@
+// src/data/subscriptions.json
+[
+  {
+    "id": "sub_netflix",
+    "name": "Netflix",
+    "category": "OTT",
+    "logoEmoji": "🎬",
+    "logoColor": "#E50914",
+    "plans": [
+      { "duration": "Monthly", "basePrice": 22.99 },
+      { "duration": "Quarterly", "basePrice": 62.99 },
+      { "duration": "Yearly", "basePrice": 219.99 }
+    ],
+    "maxSeats": 4,
+    "description": "Stream unlimited movies and TV shows on any device.",
+    "featured": true
+  },
+  {
+    "id": "sub_spotify",
+    "name": "Spotify",
+    "category": "Music",
+    "logoEmoji": "🎵",
+    "logoColor": "#1DB954",
+    "plans": [
+      { "duration": "Monthly", "basePrice": 16.99 },
+      { "duration": "Quarterly", "basePrice": 46.99 },
+      { "duration": "Yearly", "basePrice": 179.99 }
+    ],
+    "maxSeats": 6,
+    "description": "Music for everyone. Millions of songs and podcasts.",
+    "featured": true
+  },
+  {
+    "id": "sub_youtube",
+    "name": "YouTube Premium",
+    "category": "OTT",
+    "logoEmoji": "▶️",
+    "logoColor": "#FF0000",
+    "plans": [
+      { "duration": "Monthly", "basePrice": 22.99 },
+      { "duration": "Yearly", "basePrice": 219.99 }
+    ],
+    "maxSeats": 6,
+    "description": "Ad-free YouTube, YouTube Music, and offline downloads.",
+    "featured": true
+  },
+  {
+    "id": "sub_disney",
+    "name": "Disney+",
+    "category": "OTT",
+    "logoEmoji": "✨",
+    "logoColor": "#0B3D91",
+    "plans": [
+      { "duration": "Monthly", "basePrice": 13.99 },
+      { "duration": "Yearly", "basePrice": 139.99 }
+    ],
+    "maxSeats": 4,
+    "description": "Disney, Marvel, Star Wars, Pixar, and National Geographic.",
+    "featured": false
+  },
+  {
+    "id": "sub_notion",
+    "name": "Notion",
+    "category": "Productivity",
+    "logoEmoji": "📝",
+    "logoColor": "#000000",
+    "plans": [
+      { "duration": "Monthly", "basePrice": 16.00 },
+      { "duration": "Yearly", "basePrice": 160.00 }
+    ],
+    "maxSeats": 5,
+    "description": "All-in-one workspace for notes, docs, and collaboration.",
+    "featured": false
+  },
+  {
+    "id": "sub_duolingo",
+    "name": "Duolingo Super",
+    "category": "Learning",
+    "logoEmoji": "🦉",
+    "logoColor": "#58CC02",
+    "plans": [
+      { "duration": "Monthly", "basePrice": 12.99 },
+      { "duration": "Yearly", "basePrice": 99.99 }
+    ],
+    "maxSeats": 6,
+    "description": "Learn a new language. Ad-free with offline access.",
+    "featured": false
+  },
+  {
+    "id": "sub_xbox",
+    "name": "Xbox Game Pass",
+    "category": "Gaming",
+    "logoEmoji": "🎮",
+    "logoColor": "#107C10",
+    "plans": [
+      { "duration": "Monthly", "basePrice": 14.99 },
+      { "duration": "Quarterly", "basePrice": 41.99 }
+    ],
+    "maxSeats": 5,
+    "description": "Hundreds of high-quality games on console, PC, and cloud.",
+    "featured": false
+  },
+  {
+    "id": "sub_figma",
+    "name": "Figma Pro",
+    "category": "Tools",
+    "logoEmoji": "🎨",
+    "logoColor": "#F24E1E",
+    "plans": [
+      { "duration": "Monthly", "basePrice": 15.00 },
+      { "duration": "Yearly", "basePrice": 144.00 }
+    ],
+    "maxSeats": 5,
+    "description": "Professional design and prototyping for teams.",
+    "featured": false
+  }
+]
