@@ -1,6 +1,6 @@
 # StreamSplit 📱
 
-A subscription-sharing app (Subspace-style) built with React Native + Expo.
+A subscription-sharing app built with React Native + Expo.
 Works on **Android** and **Web** from a single codebase.
 
 ---
