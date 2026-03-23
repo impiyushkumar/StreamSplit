@@ -20,22 +20,45 @@ const CATEGORIES: { label: string; value: Category | "All"; icon: string }[] = [
   { label: "Productivity", value: "Productivity", icon: "⚡" },
 ];
 
+const ALL_SUBSCRIPTIONS = subscriptionsData as Subscription[];
+
 export function ExploreScreen({ navigation }: any) {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<Category | "All">("All");
 
+  const normalizedQuery = query.trim().toLowerCase();
+
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return (subscriptionsData as Subscription[]).filter((s) => {
-      const matchesQuery = s.name.toLowerCase().includes(q);
-      const matchesCat = activeCategory === "All" || s.category === activeCategory;
-      return matchesQuery && matchesCat;
+    return ALL_SUBSCRIPTIONS.filter((subscription) => {
+      const matchesQuery =
+        normalizedQuery.length === 0 ||
+        [subscription.name, subscription.description, subscription.category]
+          .join(" ")
+          .toLowerCase()
+          .includes(normalizedQuery);
+      const matchesCategory =
+        activeCategory === "All" || subscription.category === activeCategory;
+
+      return matchesQuery && matchesCategory;
     });
-  }, [query, activeCategory]);
+  }, [activeCategory, normalizedQuery]);
+
+  const resultsLabel = useMemo(() => {
+    const resultText = `${filtered.length} subscription${filtered.length !== 1 ? "s" : ""}`;
+    if (!normalizedQuery && activeCategory === "All") {
+      return `Showing all ${resultText}`;
+    }
+
+    const filters = [
+      activeCategory !== "All" ? activeCategory : null,
+      normalizedQuery ? `matching “${query.trim()}”` : null,
+    ].filter(Boolean);
+
+    return `${resultText} ${filters.length ? `for ${filters.join(" • ")}` : ""}`.trim();
+  }, [activeCategory, filtered.length, normalizedQuery, query]);
 
   return (
     <View style={styles.screen}>
-      {/* ✅ Dark theme needs light-content */}
       <StatusBar barStyle="light-content" backgroundColor={COLORS.bg} />
 
       <AppHeader title="Explore" subtitle="Find subscriptions to split" />
@@ -45,11 +68,14 @@ export function ExploreScreen({ navigation }: any) {
         contentContainerStyle={{ paddingBottom: SPACING.xxl + 16 }}
         stickyHeaderIndices={[0]}
       >
-        {/* Sticky search + filter */}
         <View style={styles.stickyBlock}>
           <Container>
             <View style={styles.searchWrap}>
-              <SearchBar value={query} onChangeText={setQuery} />
+              <SearchBar
+                value={query}
+                onChangeText={setQuery}
+                placeholder="Search by app, category, or keyword"
+              />
             </View>
 
             <ScrollView
@@ -72,17 +98,17 @@ export function ExploreScreen({ navigation }: any) {
           </Container>
         </View>
 
-        {/* Results */}
         <Container>
           <View style={styles.results}>
-            <Text style={styles.resultsCount}>
-              {filtered.length} subscription{filtered.length !== 1 ? "s" : ""}
-            </Text>
+            <Text style={styles.resultsCount}>{resultsLabel}</Text>
 
             {filtered.length === 0 ? (
               <View style={styles.empty}>
                 <Text style={styles.emptyIcon}>🔍</Text>
-                <Text style={styles.emptyText}>No results for "{query}"</Text>
+                <Text style={styles.emptyText}>No subscriptions found</Text>
+                <Text style={styles.emptyHint}>
+                  Try another keyword or switch to a different category.
+                </Text>
               </View>
             ) : (
               filtered.map((sub) => (
@@ -143,5 +169,12 @@ const styles = StyleSheet.create({
     fontSize: FONT.md,
     color: COLORS.textSecondary,
     fontWeight: "600",
+  },
+  emptyHint: {
+    fontSize: FONT.sm,
+    color: COLORS.textMuted,
+    textAlign: "center",
+    maxWidth: 280,
+    lineHeight: 20,
   },
 });
